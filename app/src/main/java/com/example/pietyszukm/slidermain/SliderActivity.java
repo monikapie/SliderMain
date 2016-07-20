@@ -1,28 +1,21 @@
 package com.example.pietyszukm.slidermain;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SliderActivity extends AppCompatActivity {
-    private static ViewPager viewPager;
     private static int currentPage = 0;
-    private static int NUM_PAGES = 0;
     private static final Integer[] images = {
             R.drawable.first,
             R.drawable.second,
             R.drawable.third
     };
-    private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
+    private ArrayList<Integer> ImagesArray = new ArrayList<>();
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +25,8 @@ public class SliderActivity extends AppCompatActivity {
     }
 
     private void init(){
-        for( int i = 0; i < images.length; i++){
-            ImagesArray.add(images[i]);
+        for (Integer image:images) {
+            ImagesArray.add(image);
         }
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new SliderAdapter(SliderActivity.this, ImagesArray));
@@ -42,7 +35,7 @@ public class SliderActivity extends AppCompatActivity {
         final float density = getResources().getDisplayMetrics().density;
 
         indicator.setRadius(5 * density);
-        NUM_PAGES = images.length;
+        int NUM_PAGES = images.length;
 
         // Pager listener over indicator
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -50,18 +43,13 @@ public class SliderActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
-
             }
 
             @Override
-            public void onPageScrolled(int pos, float arg1, int arg2) {
-
-            }
+            public void onPageScrolled(int pos, float arg1, int arg2) {}
 
             @Override
-            public void onPageScrollStateChanged(int pos) {
-
-            }
+            public void onPageScrollStateChanged(int pos) {}
         });
 
     }
